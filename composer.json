@@ -1,0 +1,14 @@
+{
+  "name": "packaged/codestandards",
+  "keywords": [
+    "phpcs",
+    "coding standard",
+    "Cubex",
+    "Packaged"
+  ],
+  "homepage": "https://github.com/packaged/codestandards",
+  "license": "MIT",
+  "require": {
+    "squizlabs/php_codesniffer": "~2.0"
+  }
+}
