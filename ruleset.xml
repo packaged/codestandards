@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ruleset name="PackagedCodeStandards">
   <description>Packaged PHP Coding Standards</description>
+  <arg name="encoding" value="UTF-8"/>
 
   <rule ref="PEAR.Functions.ValidDefaultValue"/>
   <rule ref="PEAR.Functions.FunctionCallSignature">
