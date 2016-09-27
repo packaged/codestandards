@@ -9,7 +9,8 @@
  * @author    Greg Sherwood <gsherwood@squiz.net>
  * @author    Marc McIntyre <mmcintyre@squiz.net>
  * @copyright 2006-2012 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt
+ *            BSD Licence
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
 
@@ -23,14 +24,14 @@
  * @author    Greg Sherwood <gsherwood@squiz.net>
  * @author    Marc McIntyre <mmcintyre@squiz.net>
  * @copyright 2006-2012 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt
+ *            BSD Licence
  * @version   Release: 1.4.3
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
 class PackagedCodeStandards_Sniffs_NamingConventions_UpperCaseConstantNameSniff
   implements PHP_CodeSniffer_Sniff
 {
-
 
   /**
    * Returns an array of tokens this test wants to listen for.
@@ -48,14 +49,14 @@ class PackagedCodeStandards_Sniffs_NamingConventions_UpperCaseConstantNameSniff
    * Processes this test, when one of its tokens is encountered.
    *
    * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
-   * @param int                  $stackPtr  The position of the current token in the
-   *                                        stack passed in $tokens.
+   * @param int                  $stackPtr  The position of the current token
+   *                                        in the stack passed in $tokens.
    *
    * @return void
    */
   public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
   {
-    $tokens    = $phpcsFile->getTokens();
+    $tokens = $phpcsFile->getTokens();
     $constName = $tokens[$stackPtr]['content'];
 
     // If this token is in a heredoc, ignore it.
@@ -114,15 +115,13 @@ class PackagedCodeStandards_Sniffs_NamingConventions_UpperCaseConstantNameSniff
         /***
          * Support __default for SPL Enum Default
          */
-        if(strtoupper($constName) !== $constName && substr(
-            $constName,
-            0,
-            2
-          ) !== '__'
+        if(strtoupper($constName) !== $constName
+          && substr($constName, 0, 2) !== '__'
+          && strtoupper($constName) !== 'CLASS'
         )
         {
           $error = 'Class constants must be uppercase; expected %s but found %s';
-          $data  = [
+          $data = [
             strtoupper($constName),
             $constName,
           ];
@@ -223,24 +222,21 @@ class PackagedCodeStandards_Sniffs_NamingConventions_UpperCaseConstantNameSniff
       }
 
       // This is a real constant.
-      if(strtoupper($constName) !== $constName && substr(
-          $constName,
-          0,
-          2
-        ) !== '__'
+      if(strtoupper($constName) !== $constName
+        && substr($constName, 0, 2) !== '__'
+        && strtoupper($constName) !== 'CLASS'
       )
       {
         $error = 'Constants must be uppercase; expected %s but found %s';
-        $data  = [
+        $data = [
           strtoupper($constName),
           $constName,
         ];
         $phpcsFile->addError($error, $stackPtr, 'ConstantNotUpperCase', $data);
       }
     }
-    else if(strtolower($constName) === 'define' || strtolower(
-        $constName
-      ) === 'constant'
+    else if(strtolower($constName) === 'define'
+      || strtolower($constName) === 'constant'
     )
     {
 
@@ -277,23 +273,21 @@ class PackagedCodeStandards_Sniffs_NamingConventions_UpperCaseConstantNameSniff
       $constName = $tokens[$constPtr]['content'];
 
       // Check for constants like self::CONSTANT.
-      $prefix   = '';
+      $prefix = '';
       $splitPos = strpos($constName, '::');
       if($splitPos !== false)
       {
-        $prefix    = substr($constName, 0, ($splitPos + 2));
+        $prefix = substr($constName, 0, ($splitPos + 2));
         $constName = substr($constName, ($splitPos + 2));
       }
 
-      if(strtoupper($constName) !== $constName && substr(
-          $constName,
-          0,
-          2
-        ) !== '__'
+      if(strtoupper($constName) !== $constName
+        && substr($constName, 0, 2) !== '__'
+        && strtoupper($constName) !== 'CLASS'
       )
       {
         $error = 'Constants must be uppercase; expected %s but found %s';
-        $data  = [
+        $data = [
           $prefix . strtoupper($constName),
           $prefix . $constName,
         ];
