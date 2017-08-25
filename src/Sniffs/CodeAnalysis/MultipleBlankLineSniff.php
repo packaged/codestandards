@@ -1,23 +1,28 @@
 <?php
 
+namespace Packaged\CodeStandards\Sniffs\CodeAnalysis;
+
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+
 /**
  * @author gareth.evans
  */
 class PackagedCodeStandards_Sniffs_CodeAnalysis_MultipleBlankLineSniff
-  implements PHP_CodeSniffer_Sniff
+  implements Sniff
 {
   public function register()
   {
     return [T_WHITESPACE];
   }
 
-  public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+  public function process(File $phpcsFile, $stackPtr)
   {
-    $tokens           = $phpcsFile->getTokens();
-    $blankLines       = 0;
+    $tokens = $phpcsFile->getTokens();
+    $blankLines = 0;
     $previousStackPtr = $stackPtr - 1;
-    $eolCharLen       = strlen($phpcsFile->eolChar);
-    $errorSet         = false;
+    $eolCharLen = strlen($phpcsFile->eolChar);
+    $errorSet = false;
 
     do
     {
@@ -26,7 +31,7 @@ class PackagedCodeStandards_Sniffs_CodeAnalysis_MultipleBlankLineSniff
       {
         $blankLines++;
       }
-      elseif($tokens[$stackPtr]['type'] !== "T_WHITESPACE")
+      else if($tokens[$stackPtr]['type'] !== "T_WHITESPACE")
       {
         break;
       }

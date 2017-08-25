@@ -1,24 +1,10 @@
 <?php
-/**
- * PackagedCodeStandards_Sniffs_NamingConventions_ValidFunctionNameSniff.
- *
- * PHP version 5
- *
- * @category  PHP
- * @package   PHP_CodeSniffer
- * @author    Gareth Evans <gareth.evans@justdevelop.it>
- */
 
-if(class_exists(
-    'PEAR_Sniffs_NamingConventions_ValidFunctionNameSniff',
-    true
-  ) === false
-)
-{
-  throw new PHP_CodeSniffer_Exception(
-    'Class PEAR_Sniffs_NamingConventions_ValidFunctionNameSniff not found'
-  );
-}
+namespace Packaged\CodeStandards\Sniffs\NamingConventions;
+
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Standards\PEAR\Sniffs\NamingConventions\ValidFunctionNameSniff;
+use PHP_CodeSniffer\Util\Common;
 
 /**
  * PackagedCodeStandards_Sniffs_NamingConventions_ValidFunctionNameSniff.
@@ -31,25 +17,26 @@ if(class_exists(
  * @author    Greg Sherwood <gsherwood@squiz.net>
  * @author    Marc McIntyre <mmcintyre@squiz.net>
  * @copyright 2006-2012 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt
+ *            BSD Licence
  * @version   Release: 1.4.3
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
 class PackagedCodeStandards_Sniffs_NamingConventions_ValidFunctionNameSniff
-  extends PEAR_Sniffs_NamingConventions_ValidFunctionNameSniff
+  extends ValidFunctionNameSniff
 {
   /**
    * Processes the tokens within the scope.
    *
-   * @param PHP_CodeSniffer_File $phpcsFile The file being processed.
-   * @param int                  $stackPtr  The position where this token was
+   * @param File $phpcsFile                 The file being processed.
+   * @param int  $stackPtr                  The position where this token was
    *                                        found.
-   * @param int                  $currScope The position of the current scope.
+   * @param int  $currScope                 The position of the current scope.
    *
    * @return void
    */
   protected function processTokenWithinScope(
-    PHP_CodeSniffer_File $phpcsFile, $stackPtr, $currScope
+    File $phpcsFile, $stackPtr, $currScope
   )
   {
     $methodName = $phpcsFile->getDeclarationName($stackPtr);
@@ -92,16 +79,16 @@ class PackagedCodeStandards_Sniffs_NamingConventions_ValidFunctionNameSniff
       return;
     }
 
-    $methodProps    = $phpcsFile->getMethodProperties($stackPtr);
-    $isPublic       = ($methodProps['scope'] === 'public') ? true : false;
-    $scope          = $methodProps['scope'];
+    $methodProps = $phpcsFile->getMethodProperties($stackPtr);
+    $isPublic = ($methodProps['scope'] === 'public') ? true : false;
+    $scope = $methodProps['scope'];
     $scopeSpecified = $methodProps['scope_specified'];
 
     // If it's a private method, it must have an underscore on the front.
     if($isPublic === false && $methodName{0} !== '_')
     {
       $error = '%s method name "%s" must be prefixed with an underscore';
-      $data  = [
+      $data = [
         ucfirst($scope),
         $errorData[0],
       ];
@@ -113,7 +100,7 @@ class PackagedCodeStandards_Sniffs_NamingConventions_ValidFunctionNameSniff
     if($isPublic === true && $scopeSpecified === true && $methodName{0} === '_')
     {
       $error = '%s method name "%s" must not be prefixed with an underscore';
-      $data  = [
+      $data = [
         ucfirst($scope),
         $errorData[0],
       ];
@@ -132,7 +119,7 @@ class PackagedCodeStandards_Sniffs_NamingConventions_ValidFunctionNameSniff
       $testMethodName = substr($methodName, 1);
     }
 
-    if(PHP_CodeSniffer::isCamelCaps(
+    if(Common::isCamelCaps(
         $testMethodName,
         false,
         $isPublic,
@@ -143,7 +130,7 @@ class PackagedCodeStandards_Sniffs_NamingConventions_ValidFunctionNameSniff
       if($scopeSpecified === true)
       {
         $error = '%s method name "%s" is not in camel caps format';
-        $data  = [
+        $data = [
           ucfirst($scope),
           $errorData[0],
         ];
@@ -160,7 +147,7 @@ class PackagedCodeStandards_Sniffs_NamingConventions_ValidFunctionNameSniff
   }
 
   protected function processTokenOutsideScope(
-    PHP_CodeSniffer_File $phpcsFile, $stackPtr
+    File $phpcsFile, $stackPtr
   )
   {
   }

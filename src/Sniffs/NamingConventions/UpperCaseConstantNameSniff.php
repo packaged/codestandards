@@ -1,18 +1,9 @@
 <?php
-/**
- * Generic_Sniffs_NamingConventions_UpperCaseConstantNameSniff.
- *
- * PHP version 5
- *
- * @category  PHP
- * @package   PHP_CodeSniffer
- * @author    Greg Sherwood <gsherwood@squiz.net>
- * @author    Marc McIntyre <mmcintyre@squiz.net>
- * @copyright 2006-2012 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt
- *            BSD Licence
- * @link      http://pear.php.net/package/PHP_CodeSniffer
- */
+
+namespace Packaged\CodeStandards\Sniffs\NamingConventions;
+
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
 
 /**
  * Generic_Sniffs_NamingConventions_UpperCaseConstantNameSniff.
@@ -30,7 +21,7 @@
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
 class PackagedCodeStandards_Sniffs_NamingConventions_UpperCaseConstantNameSniff
-  implements PHP_CodeSniffer_Sniff
+  implements Sniff
 {
 
   /**
@@ -48,13 +39,13 @@ class PackagedCodeStandards_Sniffs_NamingConventions_UpperCaseConstantNameSniff
   /**
    * Processes this test, when one of its tokens is encountered.
    *
-   * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
-   * @param int                  $stackPtr  The position of the current token
+   * @param File $phpcsFile                 The file being scanned.
+   * @param int  $stackPtr                  The position of the current token
    *                                        in the stack passed in $tokens.
    *
    * @return void
    */
-  public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+  public function process(File $phpcsFile, $stackPtr)
   {
     $tokens = $phpcsFile->getTokens();
     $constName = $tokens[$stackPtr]['content'];

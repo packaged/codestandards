@@ -1,12 +1,10 @@
 <?php
-/**
- * PackagedCodeStandards_Sniffs_WhiteSpace_ScopeRegularClosingBraceSniff.
- *
- * PHP version 5
- *
- * @category  PHP
- * @package   PHP_CodeSniffer
- */
+
+namespace Packaged\CodeStandards\Sniffs\Whitespace;
+
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Util\Tokens;
 
 /**
  * PackagedCodeStandards_Sniffs_WhiteSpace_ScopeRegularClosingBraceSniff.
@@ -19,12 +17,13 @@
  * @author    Greg Sherwood <gsherwood@squiz.net>
  * @author    Marc McIntyre <mmcintyre@squiz.net>
  * @copyright 2006-2012 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt
+ *            BSD Licence
  * @version   Release: 1.4.5
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
 class PackagedCodeStandards_Sniffs_WhiteSpace_ScopeRegularClosingBraceSniff
-  implements PHP_CodeSniffer_Sniff
+  implements Sniff
 {
 
   /**
@@ -34,7 +33,6 @@ class PackagedCodeStandards_Sniffs_WhiteSpace_ScopeRegularClosingBraceSniff
    */
   public $indent = 2;
 
-
   /**
    * Returns an array of tokens this test wants to listen for.
    *
@@ -42,20 +40,20 @@ class PackagedCodeStandards_Sniffs_WhiteSpace_ScopeRegularClosingBraceSniff
    */
   public function register()
   {
-    return PHP_CodeSniffer_Tokens::$scopeOpeners;
+    return Tokens::$scopeOpeners;
   }//end register()
-
 
   /**
    * Processes this test, when one of its tokens is encountered.
    *
-   * @param PHP_CodeSniffer_File $phpcsFile All the tokens found in the document.
-   * @param int                  $stackPtr  The position of the current token
+   * @param File $phpcsFile                 All the tokens found in the
+   *                                        document.
+   * @param int  $stackPtr                  The position of the current token
    *                                        in the stack passed in $tokens.
    *
    * @return void
    */
-  public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+  public function process(File $phpcsFile, $stackPtr)
   {
     $tokens = $phpcsFile->getTokens();
 
@@ -67,7 +65,7 @@ class PackagedCodeStandards_Sniffs_WhiteSpace_ScopeRegularClosingBraceSniff
     }
 
     $scopeStart = $tokens[$stackPtr]['scope_opener'];
-    $scopeEnd   = $tokens[$stackPtr]['scope_closer'];
+    $scopeEnd = $tokens[$stackPtr]['scope_closer'];
 
     // If the scope closer doesn't think it belongs to this scope opener
     // then the opener is sharing its closer ith other tokens. We only
@@ -133,7 +131,7 @@ class PackagedCodeStandards_Sniffs_WhiteSpace_ScopeRegularClosingBraceSniff
       if($braceIndent !== ($startColumn + $this->indent))
       {
         $error = 'Case breaking statement indented incorrectly; expected %s spaces, found %s';
-        $data  = [
+        $data = [
           ($startColumn + $this->indent - 1),
           ($braceIndent - 1),
         ];
@@ -145,7 +143,7 @@ class PackagedCodeStandards_Sniffs_WhiteSpace_ScopeRegularClosingBraceSniff
       if($braceIndent !== $startColumn)
       {
         $error = 'Closing brace indented incorrectly; expected %s spaces, found %s';
-        $data  = [
+        $data = [
           ($startColumn - 1),
           ($braceIndent - 1),
         ];
