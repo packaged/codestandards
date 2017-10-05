@@ -3,7 +3,7 @@
 namespace Packaged\CodeStandards\Sniffs\NamingConventions;
 
 use PHP_CodeSniffer\Files\File;
-use PHP_CodeSniffer\Standards\PEAR\Sniffs\NamingConventions\ValidFunctionNameSniff;
+use PHP_CodeSniffer\Standards\PEAR\Sniffs\NamingConventions\ValidFunctionNameSniff as OriginalValidFunctionNameSniff;
 use PHP_CodeSniffer\Util\Common;
 
 /**
@@ -22,8 +22,7 @@ use PHP_CodeSniffer\Util\Common;
  * @version   Release: 1.4.3
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
-class PackagedCodeStandards_Sniffs_NamingConventions_ValidFunctionNameSniff
-  extends ValidFunctionNameSniff
+class ValidFunctionNameSniff extends OriginalValidFunctionNameSniff
 {
   /**
    * Processes the tokens within the scope.
@@ -119,13 +118,7 @@ class PackagedCodeStandards_Sniffs_NamingConventions_ValidFunctionNameSniff
       $testMethodName = substr($methodName, 1);
     }
 
-    if(Common::isCamelCaps(
-        $testMethodName,
-        false,
-        $isPublic,
-        false
-      ) === false
-    )
+    if(Common::isCamelCaps($testMethodName, false, $isPublic, false) === false)
     {
       if($scopeSpecified === true)
       {
@@ -146,9 +139,7 @@ class PackagedCodeStandards_Sniffs_NamingConventions_ValidFunctionNameSniff
     }
   }
 
-  protected function processTokenOutsideScope(
-    File $phpcsFile, $stackPtr
-  )
+  protected function processTokenOutsideScope(File $phpcsFile, $stackPtr)
   {
   }
 }

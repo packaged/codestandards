@@ -20,8 +20,7 @@ use PHP_CodeSniffer\Sniffs\Sniff;
  * @version   Release: 1.4.3
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
-class PackagedCodeStandards_Sniffs_NamingConventions_UpperCaseConstantNameSniff
-  implements Sniff
+class UpperCaseConstantNameSniff implements Sniff
 {
 
   /**

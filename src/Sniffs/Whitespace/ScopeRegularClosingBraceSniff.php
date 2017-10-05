@@ -22,8 +22,7 @@ use PHP_CodeSniffer\Util\Tokens;
  * @version   Release: 1.4.5
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
-class PackagedCodeStandards_Sniffs_WhiteSpace_ScopeRegularClosingBraceSniff
-  implements Sniff
+class ScopeRegularClosingBraceSniff implements Sniff
 {
 
   /**

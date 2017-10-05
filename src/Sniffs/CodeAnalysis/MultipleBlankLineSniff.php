@@ -8,8 +8,7 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 /**
  * @author gareth.evans
  */
-class PackagedCodeStandards_Sniffs_CodeAnalysis_MultipleBlankLineSniff
-  implements Sniff
+class MultipleBlankLineSniff implements Sniff
 {
   public function register()
   {
