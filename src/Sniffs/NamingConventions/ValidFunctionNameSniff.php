@@ -84,7 +84,7 @@ class ValidFunctionNameSniff extends OriginalValidFunctionNameSniff
     $scopeSpecified = $methodProps['scope_specified'];
 
     // If it's a private method, it must have an underscore on the front.
-    if($isPublic === false && $methodName{0} !== '_')
+    if($isPublic === false && $methodName[0] !== '_')
     {
       $error = '%s method name "%s" must be prefixed with an underscore';
       $data = [
@@ -96,7 +96,7 @@ class ValidFunctionNameSniff extends OriginalValidFunctionNameSniff
     }
 
     // If it's not a private method, it must not have an underscore on the front.
-    if($isPublic === true && $scopeSpecified === true && $methodName{0} === '_')
+    if($isPublic === true && $scopeSpecified === true && $methodName[0] === '_')
     {
       $error = '%s method name "%s" must not be prefixed with an underscore';
       $data = [
@@ -113,7 +113,7 @@ class ValidFunctionNameSniff extends OriginalValidFunctionNameSniff
     // prefix if there is one because we cant determine if it is private or
     // public.
     $testMethodName = $methodName;
-    if($scopeSpecified === false && $methodName{0} === '_')
+    if($scopeSpecified === false && $methodName[0] === '_')
     {
       $testMethodName = substr($methodName, 1);
     }
