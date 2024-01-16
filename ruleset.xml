@@ -9,11 +9,7 @@
       <property name="indent" value="2"/>
     </properties>
   </rule>
-  <rule ref="PEAR.Classes.ClassDeclaration">
-    <properties>
-      <property name="indent" value="2"/>
-    </properties>
-  </rule>
+  <rule ref="PEAR.Classes.ClassDeclaration"/>
 
   <rule ref="Generic.Formatting.DisallowMultipleStatements"/>
   <rule ref="Generic.Formatting.NoSpaceAfterCast"/>
